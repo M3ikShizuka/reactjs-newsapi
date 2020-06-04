@@ -3,7 +3,13 @@ import { SHA1 } from '../common/sha1.js';
 import { getHeadlines } from './NewsAPI.js';
 import FilterPanel from './FilterPanel.js';
 import ArticleBlockItem from './ArticleBlockItem.js';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import countries from '../static/countries.json';
+import ApngComponent from 'react-apng';
+import './news.scss';
+import imageLoading from '../static/img/rem-loading.png';
+import imageNothing from '../static/img/shinjionchair.png';
+import imageNoMore from '../static/img/kyouko-its-fucking-nothing.png';
 
 class News extends React.Component {
     constructor(props) {
@@ -14,8 +20,13 @@ class News extends React.Component {
             optionsCountry.push({ key: key, value: key, text: text});
         });
 
+        let defaultCountryValue = localStorage.getItem("filterCountry");
+        if (!defaultCountryValue) {
+            defaultCountryValue = "US";
+        }
+
         let indexOfDefaultCountry = optionsCountry.findIndex((element, index) => {
-            if (element.value === "US") {
+            if (element.value === defaultCountryValue) {
                 return index;
             }
         });
@@ -30,25 +41,44 @@ class News extends React.Component {
             articles: []
         }
 
+        this.currentPage = 1;
+        this.canFetchMoreData = true;
+        this.endMessage = null;
+
         // Bind functions or use arrow functions.
         this.handleSearchButton = this.handleSearchButton.bind(this);
         this.handleFilterCountryChange = this.handleFilterCountryChange.bind(this);
+        this.fetchMoreData = this.fetchMoreData.bind(this);
+        this.refresh = this.refresh.bind(this);
     }
 
     componentDidMount() {
         this.getData();
     }
 
-    getData() {
+    responseCheck = (result) => {
+        if (
+            result &&
+            result.status === "error"
+            ) {
+            alert(`[ERROR] getHeadlines(): ${result.message}`);
+            return false;
+        }
+
+        this.endMessage = result.totalResults > 0 ? this.endMessageNoMoreItems() : this.endMessageNothingFound();
+
+        if (result.articles.length === 0) {
+            this.canFetchMoreData = false;
+        }
+
+        return true;
+    }
+
+    getData(page = 1, pageSize = 10) {
         getHeadlines(
             (request, result) => {
-                if (
-                    result &&
-                    result.status === "error"
-                    ) {
-                    alert(`[ERROR] getHeadlines(): ${result.message}`);
+                if (!this.responseCheck(result))
                     return;
-                }
 
                 let articles = result.articles.map( (article) => {
                     article.id = SHA1(article.author + article.title + article.publishedAt);
@@ -63,13 +93,80 @@ class News extends React.Component {
     }
 
     handleSearchButton() {
+        // Reset current page when change filters.
+        this.currentPage = 1;
+        this.canFetchMoreData = true;
         this.getData();
     }
 
     handleFilterCountryChange(event, { value }) {
         this.setState({filterCountry: value})
+        localStorage.setItem("filterCountry", value);
     }
     
+    fetchMoreData() {
+        this.currentPage++;
+
+        getHeadlines(
+            (request, result) => {
+                if (!this.responseCheck(result))
+                    return;
+
+                let articles = result.articles.map( (article) => {
+                    article.id = SHA1(article.author + article.title + article.publishedAt);
+                })
+
+                // Append new articles.
+                this.setState({articles: this.state.articles.concat(result.articles)});
+            },
+            (request, error) => {
+                alert("getHeadlines(): Request error!")
+            },
+            this.state.filterCountry,
+            this.currentPage
+        )
+    }
+
+    refresh() {
+        this.handleSearchButton();
+    }
+
+    loadMessage = () => {
+        return (
+            <div className="loading-block">
+                <div className="loading-info">
+                    <h4>Loading.</h4>
+                    <p>ロード中。。。</p>
+                </div>
+                <img className="loading-img" src={imageLoading}/>
+            </div>
+        );
+    }
+
+    endMessageNothingFound = () => {
+        return (
+            <div className="loading-block">
+                <div className="loading-info">
+                    <h4>Nothing here.</h4>
+                    <p>ここは終わり。</p>
+                </div>
+                <img className="loading-img" src={imageNothing}/>
+            </div>
+        );
+    }
+
+    endMessageNoMoreItems = () => {
+        return (
+            <div className="loading-block">
+                <div className="loading-info">
+                    <h4>That's All Folks!</h4>
+                    <p>{"(ﾉ>_<)ﾉ"}</p>
+                </div>
+                <img className="loading-img" src={imageNoMore}/>
+            </div>
+        );
+    }
+
     render() {
         return (
             <div className="news">
@@ -79,14 +176,33 @@ class News extends React.Component {
                     handleSearchButton={this.handleSearchButton}
                 />
                 <div className="article-list">
-                    {
-                        this.state.articles.map( article => {
-                                return (
-                                    <ArticleBlockItem key={article.id} article={article}/>
-                                );
-                            }
-                        )
-                    }
+                    <InfiniteScroll
+                        dataLength={this.state.articles.length} //This is important field to render the next data
+                        next={this.fetchMoreData}
+                        hasMore={this.canFetchMoreData}
+                        loader={this.loadMessage()}
+                        endMessage={this.endMessage}
+                        
+                        // // below props only if you need pull down functionality
+                        // refreshFunction={this.refresh}
+                        // pullDownToRefreshThreshold="10px"
+                        // pullDownToRefresh
+                        // pullDownToRefreshContent={
+                        //     <h3 style={{textAlign: 'center'}}>&#8595; Pull down to refresh</h3>
+                        // }
+                        // releaseToRefreshContent={
+                        //     <h3 style={{textAlign: 'center'}}>&#8593; Release to refresh</h3>
+                        // }
+                    >
+                        {
+                            this.state.articles.map( article => {
+                                    return (
+                                        <ArticleBlockItem key={article.id} article={article}/>
+                                    );
+                                }
+                            )
+                        }
+                    </InfiniteScroll>
                 </div>
             </div>
         );
