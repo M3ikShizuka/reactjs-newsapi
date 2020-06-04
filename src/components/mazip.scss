@@ -1,0 +1,294 @@
+.mazip_datalist {
+    width: 150px;
+    height: 40px;
+    box-sizing: border-box;
+}
+
+.mazip_datalist input {
+    padding: 2px;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.mazip_datalist .mazip_datalist_list {
+    position: relative;
+    top: 5px;
+    border: 1px solid #9a9a9a;
+    width: 98%;
+    border-radius: 5px;
+}
+
+.mazip_input_capsule {
+    float: left;
+    border-right: 1px solid rgb(200, 200, 200);
+}
+
+.mazip_button_simple {
+    display: table;
+    width: 100px;
+    height: 40px;
+    background-color: #60add5;
+}
+
+.mazip_button_simple a {
+    display: table-cell;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    transition: all 0.5s;
+}
+
+.mazip_button_simple a:hover {
+    color: #60add5;
+    background: white;
+    transition: all 0.5s;
+}
+
+*::-webkit-scrollbar-track,
+.scrollbar::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+*::-webkit-scrollbar,
+.scrollbar::-webkit-scrollbar {
+    width: 6px;
+    border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb,
+.scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba(150, 0, 255, 0.5);
+}
+
+.button_underline {
+}
+
+.button_underline a {
+    display: table-cell;
+    height: 40px;
+    color: rgb(0, 255, 255);
+    text-decoration: none;
+    text-align: -webkit-center;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+
+.button_underline a:hover .link_down_border{
+    width: 100%;
+    text-align: -webkit-center;
+    transition: all 0.5s;
+}
+
+.mazip_button{
+    display: table;
+    width: 200px;
+    height: 60px;
+}
+
+.mazip_button a {
+    display: table-cell;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    vertical-align: middle;
+    background: rgb(35, 5, 58);
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.mazip_button a:hover {
+    color: rgb(35, 5, 58);
+    background: white;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.scrollbar::-webkit-scrollbar {
+    width: 6px;
+    border-radius: 10px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba(0, 255, 255, 0.5);
+}
+
+textarea {
+    border-color: #370061;
+    background-color: rgb(45, 45, 45);
+}
+
+.mazip_form_input {
+    margin: 30px auto 0;
+    box-sizing: border-box;
+    height: 30px;
+}
+
+.mazip_form_input .placeholder {
+    margin: -30px 0;
+    padding: 0 5px;
+    width: 230px;
+    font-size: 24px;
+    transition: all 0.5s;
+    pointer-events: none;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.mazip_form_input ul,
+.mazip_form_input option {
+    border-color: #370061;
+    background-color: rgb(45, 45, 45);
+}
+
+.mazip_form_input_simple {
+    margin: 15px auto 0;
+    box-sizing: border-box;
+}
+
+.mazip_form_input_simple label {
+    font-size: 14px;
+    padding-left: 5px;
+}
+
+.mazip_form_input_simple textarea {
+    padding-left: 5px;
+    width: 300px;
+    height: 100px;
+    font-size: 14px;
+}
+
+.mazip_input_simple,
+.mazip_input {
+    width: 300px;
+    height: 30px;
+    border: 1px solid #370061;
+    padding: 0 5px;
+    font-size: 24px;
+    color: white;
+    background-color: rgb(45, 45, 45);
+    box-sizing: border-box;
+}
+
+.mazip_button {
+    display: table;
+    width: 200px;
+    height: 60px;
+}
+
+.mazip_button a {
+    display: table-cell;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    vertical-align: middle;
+    background: rgb(35, 5, 58);
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.mazip_button a:hover{
+    background: rgb(35, 5, 58);;
+    transition: all 0.5s;
+    background-color: white;
+}
+
+.mazip_select {
+    width: 230px;
+    height: 25px;
+    border: none;
+    padding-left: 2px;
+    font-size: 20px;
+    font-family: "SF-Display-Ultralight";
+    color: rgb(0, 255, 255);
+    background-color: rgb(45, 45, 45);
+    cursor: pointer;}
+
+.popup_bg{
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 100;
+}
+
+.popup_bg .popup{
+    display: table-cell;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.popup_bg .popup .popup_window{
+    margin: auto;
+    width: 50%;
+    min-width: 600px;
+    height: 10%;
+    min-height: 200px;
+    background-color: rgb(29, 29, 29);
+}
+
+.mazip_messagebox_block {
+    display: none; //display: block;
+    margin: auto;
+    border: 2px solid #ff0300;
+    width: 90%;
+    height: 60px;
+    box-sizing: border-box;
+    background-color: #ff000025;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.message_box {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.message_box > div {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    @media (max-width: 768px) {
+        font-size: 16px;
+    }
+    
+    @media (min-width: 769px) {
+        font-size: 26px;
+    }
+}
+
+.link_down_border {
+    width: 0;
+    height: 3px;
+    background-color: rgb(225, 225, 225);
+    transition: all 0.5s;
+}
+
+.clear {
+    clear: both;
+}
+
+.text_block_with_img {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.emoji {
+    width: 32px;
+    height: 32px;
+}
