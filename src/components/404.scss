@@ -1,0 +1,84 @@
+// .wrapper {
+//   padding-top: 7vw;
+//   height: 100%;
+//   box-sizing: border-box;
+// }
+// .nothing {
+//   position: relative;
+//   width: 100%;
+//   height: 100%;
+//   background-image: url("../img/Yuru-Yuri Kyouko Toshinou its-fucking-nothing.png");
+//   background-position: center;
+//   background-size: contain;
+//   background-repeat: no-repeat;
+// }
+
+
+main,
+.wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-content: stretch;
+    box-sizing: border-box;
+}
+
+main {
+    height: calc(100% - 60px);
+}
+
+.wrapper {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.nothing-svg {
+    margin: auto;
+    height: 80vh;
+}
+
+// .nothing {
+//   position: relative;
+//   display: flex;
+//   //margin: auto;
+//   box-sizing: inherit;
+//   justify-content: center;
+//   align-items: center;
+//   //width: 100%;
+//   //height: 100%;
+//   > div {
+//     position: relative;
+//     //margin: auto 80%;
+//     width: 100%;
+//     height: 100%;
+//     // background-image: url('/assets/img/Yuru-Yuri Kyouko Toshinou its-fucking-nothing.svg');
+//     background-position: center;
+//     background-size: contain;
+//     background-repeat: no-repeat;
+//   }
+//   @media screen and (min-height: 630px) {
+//     > img {
+//       //height: 100%;
+//       max-height: 100vh;
+//     }
+//     h2 {
+//       position: absolute;
+//       margin: 0;
+//       top: 63%;
+//       left: 1%;
+//       font-size: rem(20);
+//     }
+//   }
+//   @media screen and (max-height: 630px) {
+//     flex-direction: column;
+//     height: 100%;
+//     > img {
+//       height: 90%;
+//       max-height: 100vh;
+//     }
+//     h2 {
+//       margin: 5% auto 0;
+//       font-size: 3vh;
+//     }
+//   }
+// }

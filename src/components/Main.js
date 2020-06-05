@@ -1,11 +1,11 @@
 import React from 'react';
-import News from './News.js';
+import NewsHeadlines from './NewsHeadlines.jsdlines.js';
 import './main.scss';
 
 function Main() {
   return (
     <main>
-        <News/>
+        <NewsHeadlines/>
     </main>
   );
 }

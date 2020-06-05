@@ -1,13 +1,14 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 
 function HeaderPageButton(props) {
     return (
         <li>
             <div className="header_link">
-                <a href={props.url} alt={props.name}>
+                <Link to={props.url} alt={props.name}>
                     {props.name}
                     <div className="link_down_border"></div>
-                </a>
+                </Link>
             </div>
         </li>
     );

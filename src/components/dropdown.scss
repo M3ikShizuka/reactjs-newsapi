@@ -2,6 +2,9 @@
 @import "input.scss";
 
 .dropdown {
+    position: relative;
+    height: $input_height;
+
     .visible {
         display: block!important;
         visibility: visible!important;
@@ -37,6 +40,7 @@
     }
 
     .menu {
+        position: absolute;
         display: none;
         width: 100%;
         max-height: 300px;

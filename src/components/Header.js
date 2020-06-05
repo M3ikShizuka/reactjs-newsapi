@@ -3,8 +3,7 @@ import HeaderPageButton from './HeaderPageButton.js'
 import HeaderMenuPageButton from './HeaderMenuPageButton.js'
 import "./header.scss";
 
-function Header() {
-    let pageHome = "Headlines";
+function Header(props) {
 
     return(
         <header>
@@ -15,7 +14,9 @@ function Header() {
                     </div>
                     <nav className="header_buttons_content">
                         <ul>
-                            <HeaderPageButton name={pageHome.toUpperCase()} url={`/${pageHome}`}/>
+                            {props.pages.map((pageName) => {
+                                return (<HeaderPageButton name={pageName.toUpperCase()} url={`/${pageName.toLowerCase()}`}/>);
+                            })}
                         </ul>
                     </nav>
                 </div>
@@ -23,7 +24,9 @@ function Header() {
             <div className="header_menu">
                 <div className="header_menu_content">
                     <nav className="header_menu_buttons_content">
-                        <HeaderMenuPageButton name={pageHome.toUpperCase()} url={`/${pageHome}`}/>
+                        {props.pages.map((pageName) => {
+                            return (<HeaderMenuPageButton name={pageName.toUpperCase()} url={`/${pageName.toLowerCase()}`}/>);
+                        })}
                     </nav>
                 </div>
             </div>
