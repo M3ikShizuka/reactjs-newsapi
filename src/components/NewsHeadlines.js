@@ -1,16 +1,13 @@
 import React from 'react';
 import { SHA1 } from '../common/sha1.js';
 import { getHeadlines } from './NewsAPI.js';
-import FilterPanel from './FilterPanel.js';
+import FilterPanelHeadlines from './FilterPanelHeadlines.js';
 import ArticleBlockItem from './ArticleBlockItem.js';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import countries from '../static/countries.json';
-import ApngComponent from 'react-apng';
+import MessagesBlocks from "./InfoMessagesBlocks";
 import './ArticleBlockItem.scss';
 import './NewsHeadlines.scss';
-import imageLoading from '../assets/img/rem-loading.png';
-import imageNothing from '../assets/img/shinjionchair.png';
-import imageNoMore from '../assets/img/kyouko-its-fucking-nothing.png';
 
 class NewsHeadlines extends React.Component {
     constructor(props) {
@@ -21,11 +18,11 @@ class NewsHeadlines extends React.Component {
             optionsCountry.push({ key: key, value: key, text: text});
         });
 
-        const storageItemfilterCountry = "filterCountry";
-        let defaultCountryValue = localStorage.getItem(storageItemfilterCountry);
+        this.storageItemfilterCountry = "filterCountry";
+        let defaultCountryValue = localStorage.getItem(this.storageItemfilterCountry);
         
         if (defaultCountryValue == "undefined") {
-            localStorage.removeItem(storageItemfilterCountry);
+            localStorage.removeItem(this.storageItemfilterCountry);
             defaultCountryValue = null;
         }
         
@@ -69,11 +66,26 @@ class NewsHeadlines extends React.Component {
             result &&
             result.status === "error"
             ) {
-            alert(`[ERROR] getHeadlines(): ${result.message}`);
+                this.canFetchMoreData = false;
+                this.endMessage = MessagesBlocks.messageEndNothingFound();
+
+                let message = null;
+                switch(result.code) {
+                    case "parametersMissing": {
+                        return true;
+                        break;
+                    }
+                    default: {
+                        message = `[ERROR] getHeadlines(): ${result.message}`;
+                        break;
+                    }
+                }
+           
+                alert(message);
             return false;
         }
 
-        this.endMessage = result.totalResults > 0 ? this.endMessageNoMoreItems() : this.endMessageNothingFound();
+        this.endMessage = result.totalResults > 0 ? MessagesBlocks.messageEndNoMoreItems() : MessagesBlocks.messageEndNothingFound();
 
         if (result.articles.length === 0) {
             this.canFetchMoreData = false;
@@ -82,16 +94,30 @@ class NewsHeadlines extends React.Component {
         return true;
     }
 
+    handleFetchedArticles = (result) => {
+        // Handle fetched articles.
+        let articles = [];
+
+        if (result.articles != null) {
+            articles = result.articles.slice();
+            articles.map((article, key) => {
+                article.id = SHA1(article.author + article.title + article.publishedAt);
+            })
+        }
+
+        return articles;
+    }
+
     getData(page = 1, pageSize = 10) {
         getHeadlines(
             (request, result) => {
                 if (!this.responseCheck(result))
                     return;
 
-                let articles = result.articles.map( (article) => {
-                    article.id = SHA1(article.author + article.title + article.publishedAt);
-                })
-                this.setState({articles: result.articles})
+                let articles = this.handleFetchedArticles(result);
+
+                // Add new articles.
+                this.setState({articles: articles})
             },
             (request, error) => {
                 alert("getHeadlines(): Request error!")
@@ -109,7 +135,7 @@ class NewsHeadlines extends React.Component {
 
     handleFilterCountryChange(event, value) {
         this.setState({filterCountry: value})
-        localStorage.setItem("filterCountry", value);
+        localStorage.setItem(this.storageItemfilterCountry, value);
     }
     
     fetchMoreData() {
@@ -120,12 +146,15 @@ class NewsHeadlines extends React.Component {
                 if (!this.responseCheck(result))
                     return;
 
-                let articles = result.articles.map( (article) => {
-                    article.id = SHA1(article.author + article.title + article.publishedAt);
-                })
+                let articles = this.handleFetchedArticles(result);
+
+                // Concat old data with new data.
+                let articlesNew = this.state.articles.concat(articles)
 
                 // Append new articles.
-                this.setState({articles: this.state.articles.concat(result.articles)});
+                this.setState({
+                    articles: articlesNew
+                });
             },
             (request, error) => {
                 alert("getHeadlines(): Request error!")
@@ -139,46 +168,10 @@ class NewsHeadlines extends React.Component {
         this.handleSearchButton();
     }
 
-    loadMessage = () => {
-        return (
-            <div styleName="loading-block">
-                <div styleName="loading-info">
-                    <h4>Loading.</h4>
-                    <p>ロード中。。。</p>
-                </div>
-                <img styleName="loading-img" src={imageLoading}/>
-            </div>
-        );
-    }
-
-    endMessageNothingFound = () => {
-        return (
-            <div styleName="loading-block">
-                <div styleName="loading-info">
-                    <h4>Nothing here.</h4>
-                    <p>ここは終わり。</p>
-                </div>
-                <img styleName="loading-img" src={imageNothing}/>
-            </div>
-        );
-    }
-
-    endMessageNoMoreItems = () => {
-        return (
-            <div styleName="loading-block">
-                <div styleName="loading-info">
-                    <h4>That's All Folks!</h4>
-                    <p>{"(ﾉ>_<)ﾉ"}</p>
-                </div>
-                <img styleName="loading-img" src={imageNoMore}/>
-            </div>
-        );
-    }
-
     render() {
         return (
             <div styleName="wrapper">
-                <FilterPanel 
+                <FilterPanelHeadlines
                     filterConfig={this.filterConfig}
                     handleFilterCountryChange={this.handleFilterCountryChange}
                     handleSearchButton={this.handleSearchButton}
@@ -188,7 +181,7 @@ class NewsHeadlines extends React.Component {
                         dataLength={this.state.articles.length} //This is important field to render the next data
                         next={this.fetchMoreData}
                         hasMore={this.canFetchMoreData}
-                        loader={this.loadMessage()}
+                        loader={MessagesBlocks.messageLoading()}
                         endMessage={this.endMessage}
                         
                         // // below props only if you need pull down functionality

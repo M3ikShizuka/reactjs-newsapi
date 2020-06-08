@@ -12,6 +12,10 @@ class Popup extends React.Component {
         this.props.handleAccept();
     }
 
+    componentDidMount() {
+        document.body.style.overflow = 'hidden';
+    }
+
     render() {
         return (
             <div styleName="popup-background">
@@ -34,7 +38,7 @@ class Popup extends React.Component {
                 </div>
             </div>
         );
-    };
+    }
 }
 
 export default Popup;

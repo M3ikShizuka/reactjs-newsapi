@@ -1,0 +1,22 @@
+.loading-block {
+    display: flex;
+    justify-content: center;
+
+    .loading-info {
+        margin: 0 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        box-sizing: border-box;
+
+        h4, p {
+            margin: 0;
+        }
+    }
+
+    .loading-img {
+        display: block;
+        width: 100px;
+    }
+}

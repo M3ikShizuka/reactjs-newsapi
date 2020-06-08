@@ -1,6 +1,6 @@
 import React from "react";
 import onClickOutside from "react-onclickoutside";
-import "./dropdown.scss";
+import "./Dropdown.scss";
 
 class Dropdown extends React.Component {
     constructor(props) {

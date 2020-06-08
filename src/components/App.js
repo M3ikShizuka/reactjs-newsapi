@@ -5,9 +5,12 @@ import {
     Route,
     Redirect
 } from "react-router-dom";
+import ScrollToTop from "./ScrollToTop";
+import ScrollToTopOnMount from "./ScrollToTopOnMount";
 import Header from './Header.js';
 // import Main from './Main.js';
 import NewsHeadlines from './NewsHeadlines.js';
+import NewsEverything from './NewsEverything.js';
 import NotFound from './NotFound.js';
 import Popup from "./Popup";
 import './main.scss';
@@ -23,6 +26,7 @@ class App extends React.Component {
 
     handleDisclaimerAccept = () => {
         localStorage.setItem("disclaimerAccepted", "true");
+        document.body.style.overflow = '';
         this.setState({disclaimerAccepted: true});
     }
 
@@ -41,12 +45,15 @@ class App extends React.Component {
                 <main>
                     <Switch>
                         <Route exact path={`/${pageHeadlines}`}>
+                            <ScrollToTop/>
                             <NewsHeadlines/>
                         </Route>
                         <Route exact path={`/${pageEverything}`}>
-                            <NewsHeadlines/>
+                            <ScrollToTop/>
+                            <NewsEverything/>
                         </Route>
                         <Route exact path={`/${pageNotFound}`}>
+                            <ScrollToTop/>
                             <NotFound/>
                         </Route>
                         <Route exact path={`/`}>

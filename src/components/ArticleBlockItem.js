@@ -1,6 +1,8 @@
 import React from 'react';
 import Moment from 'react-moment';
+import LoadingBlock from "./LoadingBlock";
 import './ArticleBlockItem.scss';
+import imageLoading from '../assets/img/rem-loading.png';
 
 function ArticleBlockItem(props) {
 	let article = props.article;
@@ -10,13 +12,42 @@ function ArticleBlockItem(props) {
         nextDay : '[Tomorrow at] LT',
         lastWeek : '[last] dddd [at] LT',
         nextWeek : 'dddd [at] LT',
-        sameElse : 'L'
+        sameElse : 'YYYY-MM-DD HH:mm:ss'
     };
 
 	return (
 		<div styleName="article-block">
 			<div styleName="article-image-block">
-				<img src={article.urlToImage}/>
+					{
+						(() => {
+							if (article.urlToImage === null) {
+								return(
+									<LoadingBlock
+										title="No image"
+										subTitle="Just because it doesn't exist"
+										image={imageLoading}
+									/>
+								);
+							}
+							else if (
+								article.urlToImage[0] === '$' &&
+								article.urlToImage[1] === '{'
+								) {
+								return(
+									<LoadingBlock
+										title="No image"
+										subTitle="Cause newsapi fucked up。"
+										image={imageLoading}
+									/>
+								);
+							}
+							else {
+								return(
+									<img src={article.urlToImage}/>
+								);
+							}
+						})()
+					}
 			</div>
 			<div styleName="article-info-block">
 				<h2>{article.title}</h2>
