@@ -87,8 +87,8 @@
 
 .mazip_button{
     display: table;
-    width: 200px;
-    height: 60px;
+    width: 100%;
+    height: 100%;
 }
 
 .mazip_button a {
@@ -179,29 +179,6 @@ textarea {
     color: white;
     background-color: rgb(45, 45, 45);
     box-sizing: border-box;
-}
-
-.mazip_button {
-    display: table;
-    width: 200px;
-    height: 60px;
-}
-
-.mazip_button a {
-    display: table-cell;
-    color: white;
-    text-decoration: none;
-    text-align: center;
-    vertical-align: middle;
-    background: rgb(35, 5, 58);
-    transition: all 0.5s;
-    cursor: pointer;
-}
-
-.mazip_button a:hover{
-    background: rgb(35, 5, 58);;
-    transition: all 0.5s;
-    background-color: white;
 }
 
 .mazip_select {

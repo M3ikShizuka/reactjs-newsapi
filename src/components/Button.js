@@ -1,8 +1,9 @@
 import React from 'react';
+import "./mazip.scss";
 
 function Button(props) {
-	return (
-        <div className="mazip_button">
+    return (
+        <div styleName="mazip_button">
             <a 
                 href="#"
                 onClick={props.handleSearchButton}

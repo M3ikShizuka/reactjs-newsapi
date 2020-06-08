@@ -6,10 +6,11 @@ import ArticleBlockItem from './ArticleBlockItem.js';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import countries from '../static/countries.json';
 import ApngComponent from 'react-apng';
-import './news.scss';
-import imageLoading from '../static/img/rem-loading.png';
-import imageNothing from '../static/img/shinjionchair.png';
-import imageNoMore from '../static/img/kyouko-its-fucking-nothing.png';
+import './ArticleBlockItem.scss';
+import './NewsHeadlines.scss';
+import imageLoading from '../assets/img/rem-loading.png';
+import imageNothing from '../assets/img/shinjionchair.png';
+import imageNoMore from '../assets/img/kyouko-its-fucking-nothing.png';
 
 class NewsHeadlines extends React.Component {
     constructor(props) {
@@ -20,14 +21,21 @@ class NewsHeadlines extends React.Component {
             optionsCountry.push({ key: key, value: key, text: text});
         });
 
-        let defaultCountryValue = localStorage.getItem("filterCountry");
+        const storageItemfilterCountry = "filterCountry";
+        let defaultCountryValue = localStorage.getItem(storageItemfilterCountry);
+        
+        if (defaultCountryValue == "undefined") {
+            localStorage.removeItem(storageItemfilterCountry);
+            defaultCountryValue = null;
+        }
+        
         if (!defaultCountryValue) {
             defaultCountryValue = "US";
         }
 
         let indexOfDefaultCountry = optionsCountry.findIndex((element, index) => {
             if (element.value === defaultCountryValue) {
-                return index;
+                return true;
             }
         });
 
@@ -99,7 +107,7 @@ class NewsHeadlines extends React.Component {
         this.getData();
     }
 
-    handleFilterCountryChange(event, { value }) {
+    handleFilterCountryChange(event, value) {
         this.setState({filterCountry: value})
         localStorage.setItem("filterCountry", value);
     }
@@ -133,49 +141,49 @@ class NewsHeadlines extends React.Component {
 
     loadMessage = () => {
         return (
-            <div className="loading-block">
-                <div className="loading-info">
+            <div styleName="loading-block">
+                <div styleName="loading-info">
                     <h4>Loading.</h4>
                     <p>ロード中。。。</p>
                 </div>
-                <img className="loading-img" src={imageLoading}/>
+                <img styleName="loading-img" src={imageLoading}/>
             </div>
         );
     }
 
     endMessageNothingFound = () => {
         return (
-            <div className="loading-block">
-                <div className="loading-info">
+            <div styleName="loading-block">
+                <div styleName="loading-info">
                     <h4>Nothing here.</h4>
                     <p>ここは終わり。</p>
                 </div>
-                <img className="loading-img" src={imageNothing}/>
+                <img styleName="loading-img" src={imageNothing}/>
             </div>
         );
     }
 
     endMessageNoMoreItems = () => {
         return (
-            <div className="loading-block">
-                <div className="loading-info">
+            <div styleName="loading-block">
+                <div styleName="loading-info">
                     <h4>That's All Folks!</h4>
                     <p>{"(ﾉ>_<)ﾉ"}</p>
                 </div>
-                <img className="loading-img" src={imageNoMore}/>
+                <img styleName="loading-img" src={imageNoMore}/>
             </div>
         );
     }
 
     render() {
         return (
-            <div className="news">
+            <div styleName="wrapper">
                 <FilterPanel 
                     filterConfig={this.filterConfig}
                     handleFilterCountryChange={this.handleFilterCountryChange}
                     handleSearchButton={this.handleSearchButton}
                 />
-                <div className="article-list">
+                <div styleName="article-list">
                     <InfiniteScroll
                         dataLength={this.state.articles.length} //This is important field to render the next data
                         next={this.fetchMoreData}

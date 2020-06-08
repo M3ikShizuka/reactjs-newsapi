@@ -1,10 +1,11 @@
 import React from 'react'
+import './header.scss';
 
 function HeaderMenuPageButton(props) {
     return (
-        <div className="header_table">
-            <a className="header_menu_button_page" href={props.url} alt={props.name}>
-            {props.name}
+        <div styleName="header_table">
+            <a styleName="header_menu_button_page" href={props.url} alt={props.name}>
+                {props.name}
             </a>
         </div>
     );

@@ -18,7 +18,7 @@ header {
 
 header ul {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     margin: auto;
     padding: 0;
@@ -107,7 +107,7 @@ header li a {
 
 .header_content {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     margin: auto;
     width: 90%;
@@ -138,9 +138,17 @@ header li a {
     background: #520086fa;
 }
 
+.header_menu_content {
+
+}
+
 .header_table {
     display: table;
     width: 100%;
+}
+
+.header_menu_button_page {
+    
 }
 
 .anchor {

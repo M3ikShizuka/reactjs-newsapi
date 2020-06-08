@@ -1,5 +1,5 @@
-@import "fonts.scss";
-@import "input.scss";
+@import "../fonts.scss";
+@import "../input.scss";
 
 .dropdown {
     position: relative;
@@ -37,6 +37,8 @@
         line-height: $input_height;
         font-family: $input_font;
         font-weight: 100;
+        user-select: none;
+        pointer-events: none;
     }
 
     .menu {

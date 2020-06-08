@@ -14,14 +14,14 @@ function ArticleBlockItem(props) {
     };
 
 	return (
-		<div className="article-block">
-			<div className="article-image-block">
+		<div styleName="article-block">
+			<div styleName="article-image-block">
 				<img src={article.urlToImage}/>
 			</div>
-			<div className="article-info-block">
+			<div styleName="article-info-block">
 				<h2>{article.title}</h2>
 				<p>{article.description}</p>
-				<div className="article-info">
+				<div styleName="article-info">
 					<p>{article.author}</p>
 					<p>
                         <Moment
