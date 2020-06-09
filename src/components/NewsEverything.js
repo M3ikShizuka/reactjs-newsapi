@@ -100,7 +100,7 @@ class NewsEverything extends React.Component {
                 let articles = this.handleFetchedArticles(result);
 
                 // Add new articles.
-                this.setState({articles: articles})
+                this.setState({articles: articles});
             },
             (request, error) => {
                 alert("getEverything(): Request error!")

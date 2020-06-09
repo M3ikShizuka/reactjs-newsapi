@@ -3,34 +3,86 @@ import HeaderPageButton from './HeaderPageButton.js'
 import HeaderMenuPageButton from './HeaderMenuPageButton.js'
 import "./header.scss";
 
-function Header(props) {
-    return(
-        <header>
-            <div styleName="header_wrapper">
-                <div styleName="header_content">
-                    <div styleName="header_menu_button">
-                        <div></div>
-                    </div>
-                    <nav styleName="header_buttons_content">
-                        <ul>
-                            {props.pages.map((pageName) => {
-                                return (<HeaderPageButton key={pageName.toLowerCase()}  name={pageName.toUpperCase()} url={`/${pageName.toLowerCase()}`}/>);
-                            })}
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+class Header extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isMenuOpen: false
+        }
+
+        this.menuChangeScreenWidth = 768;
+    }
+
+    componentDidMount() {
+        window.addEventListener("resize", this.updateWindowDimensions);
+    }
+    
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.updateWindowDimensions);
+    }
+    
+    updateWindowDimensions = () => {
+        if (window.innerWidth >= this.menuChangeScreenWidth) {
+            this.controlMenu(false);
+        }
+    }
+
+    handleMenuButtonOnClick = () => {
+        this.controlMenu(!this.state.isMenuOpen);
+    }
+
+    controlMenu(isMenuOpenNew) {
+        if (isMenuOpenNew) {
+            document.body.style.overflow = 'hidden';
+        }
+        else {
+            document.body.style.overflow = '';
+        }
+
+        this.setState({isMenuOpen: isMenuOpenNew});
+    }
+
+    drawMenu = () => {
+        return (
             <div styleName="header_menu">
                 <div styleName="header_menu_content">
                     <nav styleName="header_menu_buttons_content">
-                        {props.pages.map((pageName) => {
-                            return (<HeaderMenuPageButton key={pageName.toLowerCase()} name={pageName.toUpperCase()} url={`/${pageName.toLowerCase()}`}/>);
-                        })}
+                        {
+                            this.props.pages.map((pageName) => {
+                                return (<HeaderMenuPageButton key={pageName.toLowerCase()} name={pageName.toUpperCase()} url={`/${pageName.toLowerCase()}`}/>);
+                            })
+                        }
                     </nav>
                 </div>
             </div>
-        </header>
-    );
+        );
+    }
+
+    render() {
+        return(
+            <header>
+                <div styleName="header_wrapper">
+                    <div styleName="header_content">
+                        <div 
+                            styleName="header_menu_button"
+                            onClick={this.handleMenuButtonOnClick}
+                        >
+                            <div></div>
+                        </div>
+                        <nav styleName="header_buttons_content">
+                            <ul>
+                                {this.props.pages.map((pageName) => {
+                                    return (<HeaderPageButton key={pageName.toLowerCase()}  name={pageName.toUpperCase()} url={`/${pageName.toLowerCase()}`}/>);
+                                })}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                {this.state.isMenuOpen ? this.drawMenu() : null}
+            </header>
+        );
+    }
 }
 
 export default Header;

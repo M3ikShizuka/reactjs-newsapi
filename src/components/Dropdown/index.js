@@ -115,21 +115,18 @@ class Dropdown extends React.Component {
         const menuClass = "menu".concat(this.state.isMenuOpen ? " visible" : "");
 
         return (
-            <div role="combobox" aria-expanded="true" styleName="visible search dropdown">
+            <div styleName="visible search dropdown">
                 <input 
                     value={this.state.filterText}
-                    aria-autocomplete="list" 
-                    autoComplete="off" 
                     styleName="search" 
-                    tabIndex={0} type="text"
+                    type="text"
                     onChange={this.handleInputTextOnChange} 
                     onClick={this.handleInputTextOnClick}
                 />
-                <div styleName="text" role="alert" aria-live="polite" aria-atomic="true">
+                <div styleName="text">
                     {this.state.filterTextHolder}
                 </div>
-                <i aria-hidden="true" styleName="dropdown" />
-                <div role="listbox" styleName={menuClass}>
+                <div styleName={menuClass}>
                     {
                         this.state.objectArrayFiltered.map((element) => {
                             return (

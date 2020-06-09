@@ -99,9 +99,11 @@ class NewsHeadlines extends React.Component {
         let articles = [];
 
         if (result.articles != null) {
+            let startIndex = result.articles.length;
             articles = result.articles.slice();
             articles.map((article, key) => {
-                article.id = SHA1(article.author + article.title + article.publishedAt);
+                article.id = startIndex;
+                startIndex++;
             })
         }
 
@@ -117,7 +119,7 @@ class NewsHeadlines extends React.Component {
                 let articles = this.handleFetchedArticles(result);
 
                 // Add new articles.
-                this.setState({articles: articles})
+                this.setState({articles: articles});
             },
             (request, error) => {
                 alert("getHeadlines(): Request error!")
@@ -128,6 +130,7 @@ class NewsHeadlines extends React.Component {
 
     handleSearchButton() {
         // Reset current page when change filters.
+        localStorage.setItem(this.storageItemfilterCountry, value);
         this.currentPage = 1;
         this.canFetchMoreData = true;
         this.getData();
@@ -135,7 +138,6 @@ class NewsHeadlines extends React.Component {
 
     handleFilterCountryChange(event, value) {
         this.setState({filterCountry: value})
-        localStorage.setItem(this.storageItemfilterCountry, value);
     }
     
     fetchMoreData() {

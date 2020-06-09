@@ -16,7 +16,11 @@ function ArticleBlockItem(props) {
     };
 
 	return (
-		<div styleName="article-block">
+		<a
+			styleName="article-block"
+			href={article.url}
+			target="_blank"
+		>
 			<div styleName="article-image-block">
 					{
 						(() => {
@@ -51,7 +55,9 @@ function ArticleBlockItem(props) {
 			</div>
 			<div styleName="article-info-block">
 				<h2>{article.title}</h2>
-				<p>{article.description}</p>
+				<div styleName="article-info-desc">
+					<p>{article.description}</p>
+				</div>
 				<div styleName="article-info">
 					<p>{article.author}</p>
 					<p>
@@ -63,8 +69,12 @@ function ArticleBlockItem(props) {
                         </Moment>
                     </p>
 				</div>
+				<div styleName="article-info">
+					<p>{article.source.id}</p>
+					<p>{article.source.name}</p>
+				</div>
 			</div>
-		</div>  
+		</a>  
 	);
 }
 

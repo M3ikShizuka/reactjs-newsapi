@@ -132,19 +132,20 @@ header li a {
 
 .header_menu {
     position: fixed;
-    display: none;
+    // display: none;
     width: 100%;
-    height: calc(100vh - 50px);
+    height: calc(100vh - (50px - 3px)); // minus header border 3px.
     background: #520086fa;
 }
 
 .header_menu_content {
-
+    height: 100%;
 }
 
 .header_table {
     display: table;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .header_menu_button_page {
@@ -160,7 +161,6 @@ header li a {
 header {
     @media (max-width: 768px) {
         height: $header_height_menu;
-        
         
         .header_buttons_content {
             display: none;
@@ -194,6 +194,10 @@ header {
 
     @media (min-width: 769px) {
         height: $header_height;
+
+        .header_menu {
+            display: none;
+        }
 
         .header_menu_button {
             display: none;

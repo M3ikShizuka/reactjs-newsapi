@@ -1,3 +1,5 @@
+@import "./common.scss";
+
 .article-list {
     display: flex;
     flex-wrap: wrap;
@@ -8,6 +10,7 @@
     width: 100%;
 
     .article-block {
+        display: block;
         margin: 2% auto 0;
         border: 2px solid #676767;
         width: 90%;
@@ -17,6 +20,8 @@
         border-radius: 10px;
         box-sizing: border-box;
         overflow: hidden;
+        text-decoration: none;
+        transition: all 1s;
 
         .article-image-block {
             width: 100%;
@@ -34,7 +39,7 @@
         }
 
         .article-info-block {
-            padding: 0 10px 5px;
+            padding: 0 10px 10px;
             width: 100%;
             // height: 20%;
             box-sizing: border-box;
@@ -50,15 +55,30 @@
             }
             
             p {
+                margin: 0;
                 font-size: calc(4px + 1vw);
                 text-align: justify;
+                box-sizing: border-box;
+            }
+
+            .article-info-desc {
+                margin: 10px 0 10px;
+                width: 100%;
+                box-sizing: border-box;
             }
 
             .article-info {
                 display: flex;
+                margin: 2px 0;
                 width: 100%;
                 justify-content: space-between;
+                box-sizing: border-box;
             }
         }
+    }
+
+    .article-block:hover {
+        @include box-shadow($size: 5px);
+        transition: all 1s;
     }
 }

@@ -1,0 +1,14 @@
+@mixin text-shadow($x:1px, $y:1px, $blur:15px, $color: #9600ff) {
+    text-shadow:
+       (-$x) (-$y) ($blur) $color,
+       ($x) (-$y) ($blur) $color,
+       ($x) ($y) ($blur) $color,
+       (-$x) ($y) ($blur) $color;
+}
+
+@mixin box-shadow($x:1px, $y:1px, $size:15px, $color: #9600ff) {
+    box-shadow: (-$x) (-$y) ($size) $color,
+    ($x) (-$y) ($size) $color,
+    ($x) ($y) ($size) $color,
+    (-$x) ($y) ($size) $color;
+}

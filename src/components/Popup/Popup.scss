@@ -1,10 +1,4 @@
-@mixin text-shadow($color: #9600ff, $x:1px, $y:1px, $blur:15px) {
-     text-shadow:
-        (-$x) (-$y) ($blur) $color,
-        ($x) (-$y) ($blur) $color,
-        ($x) ($y) ($blur) $color,
-        (-$x) ($y) ($blur) $color;
-}
+@import "../common.scss";
 
 .popup-background {
     position: fixed;

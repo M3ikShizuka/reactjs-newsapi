@@ -1,4 +1,5 @@
 @import "fonts.scss";
+@import "mixins.scss";
 
 $input_height: 35px;
 $input_padding_hor: 5px;
@@ -19,9 +20,5 @@ input:focus {
     outline-offset: 0px !important;
     outline: none !important;
     border: 1px solid #370061;
-    box-shadow:
-    -2px -2px $input_shadow-size $input_shadow-color,
-    2px -2px $input_shadow-size $input_shadow-color,
-    2px 2px $input_shadow-size $input_shadow-color,
-    -2px 2px $input_shadow-size $input_shadow-color;
+    @include box-shadow($x:2px, $y:2px, $size:$input_shadow-size, $color: $input_shadow-color);
 }
