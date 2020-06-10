@@ -14,10 +14,11 @@ function Button(props) {
 
     return (
         <div className={mazip_button}>
-            <a 
-                href="#"
+            <div
                 onClick={props.handleSearchButton}
-            >{props.name}</a>
+            >
+                {props.name}
+            </div>
         </div>
 	);
 }

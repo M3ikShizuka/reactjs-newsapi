@@ -6,7 +6,11 @@ function HeaderPageButton(props) {
     return (
         <li>
             <div styleName="header_link">
-                <Link to={props.url} alt={props.name}>
+                <Link 
+                    to={props.url} 
+                    alt={props.name}
+                    onClick={props.handleOnClickPage}
+                >
                     {props.name}
                     <div styleName="link_down_border"></div>
                 </Link>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    BrowserRouter as Router,
+    HashRouter as Router,
     Switch,
     Route,
     Redirect
@@ -42,28 +42,26 @@ class App extends React.Component {
         return (
             <Router>
                 <Header pages={pages}/>
-                <main>
-                    <Switch>
-                        <Route exact path={`/${pageHeadlines}`}>
-                            <ScrollToTop/>
-                            <NewsHeadlines/>
-                        </Route>
-                        <Route exact path={`/${pageEverything}`}>
-                            <ScrollToTop/>
-                            <NewsEverything/>
-                        </Route>
-                        <Route exact path={`/${pageNotFound}`}>
-                            <ScrollToTop/>
-                            <NotFound/>
-                        </Route>
-                        <Route exact path={`/`}>
-                            <Redirect to={`/${pageHeadlines}`}/>
-                        </Route>
-                        <Route path="*">
-                            <Redirect to={`/${pageNotFound}`}/>
-                        </Route>
-                    </Switch>
-                </main>
+                <Switch>
+                    <Route exact path={`/${pageHeadlines}`}>
+                        <ScrollToTop/>
+                        <NewsHeadlines/>
+                    </Route>
+                    <Route exact path={`/${pageEverything}`}>
+                        <ScrollToTop/>
+                        <NewsEverything/>
+                    </Route>
+                    <Route exact path={`/${pageNotFound}`}>
+                        <ScrollToTop/>
+                        <NotFound/>
+                    </Route>
+                    <Route exact path={`/`}>
+                        <Redirect to={`/${pageHeadlines}`}/>
+                    </Route>
+                    <Route path="*">
+                        <Redirect to={`/${pageNotFound}`}/>
+                    </Route>
+                </Switch>
             {
             /*
                 <Footer/>

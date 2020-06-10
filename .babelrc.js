@@ -1,4 +1,4 @@
-const getScopedName = require('./build/getScopedName');
+// const getScopedName = require('./build/getScopedName');
 const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
@@ -16,7 +16,8 @@ module.exports = {
                         syntax: 'postcss-scss'
                     }
                 },
-                generateScopedName: isDev ? '[path]_[name]_[local]' : getScopedName,
+                generateScopedName: isDev ? '[path]_[name]_[local]' : '[sha1:hash:hex:4]',
+                // generateScopedName: isDev ? '[path]_[name]_[local]' : getScopedName,
             }
         ]
     ]

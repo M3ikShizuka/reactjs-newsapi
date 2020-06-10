@@ -1,22 +1,29 @@
-main,
-.wrapper {
+.main_notfound {
     display: flex;
     width: 100%;
     justify-content: center;
     align-content: stretch;
     box-sizing: border-box;
-}
 
-main {
-    height: calc(100% - 60px);
-}
+    .wrapper_notfound {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-content: stretch;
+        box-sizing: border-box;
+    }
 
-.wrapper {
-    height: 100%;
-    box-sizing: border-box;
-}
+    .main_notfound {
+        height: calc(100% - 60px);
+    }
 
-.nothing-svg {
-    margin: auto;
-    height: 80vh;
+    .wrapper_notfound {
+        height: 100%;
+        box-sizing: border-box;
+    }
+
+    .nothing-svg {
+        margin: auto;
+        height: 80vh;
+    }
 }

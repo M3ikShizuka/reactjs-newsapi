@@ -130,7 +130,7 @@ class NewsHeadlines extends React.Component {
 
     handleSearchButton() {
         // Reset current page when change filters.
-        localStorage.setItem(this.storageItemfilterCountry, value);
+        localStorage.setItem(this.storageItemfilterCountry, this.state.filterCountry);
         this.currentPage = 1;
         this.canFetchMoreData = true;
         this.getData();
@@ -172,42 +172,44 @@ class NewsHeadlines extends React.Component {
 
     render() {
         return (
-            <div styleName="wrapper">
-                <FilterPanelHeadlines
-                    filterConfig={this.filterConfig}
-                    handleFilterCountryChange={this.handleFilterCountryChange}
-                    handleSearchButton={this.handleSearchButton}
-                />
-                <div styleName="article-list">
-                    <InfiniteScroll
-                        dataLength={this.state.articles.length} //This is important field to render the next data
-                        next={this.fetchMoreData}
-                        hasMore={this.canFetchMoreData}
-                        loader={MessagesBlocks.messageLoading()}
-                        endMessage={this.endMessage}
-                        
-                        // // below props only if you need pull down functionality
-                        // refreshFunction={this.refresh}
-                        // pullDownToRefreshThreshold="10px"
-                        // pullDownToRefresh
-                        // pullDownToRefreshContent={
-                        //     <h3 style={{textAlign: 'center'}}>&#8595; Pull down to refresh</h3>
-                        // }
-                        // releaseToRefreshContent={
-                        //     <h3 style={{textAlign: 'center'}}>&#8593; Release to refresh</h3>
-                        // }
-                    >
-                        {
-                            this.state.articles.map( article => {
-                                    return (
-                                        <ArticleBlockItem key={article.id} article={article}/>
-                                    );
-                                }
-                            )
-                        }
-                    </InfiniteScroll>
+            <main>
+                <div styleName="wrapper_news_headlines">
+                    <FilterPanelHeadlines
+                        filterConfig={this.filterConfig}
+                        handleFilterCountryChange={this.handleFilterCountryChange}
+                        handleSearchButton={this.handleSearchButton}
+                    />
+                    <div styleName="article-list">
+                        <InfiniteScroll
+                            dataLength={this.state.articles.length} //This is important field to render the next data
+                            next={this.fetchMoreData}
+                            hasMore={this.canFetchMoreData}
+                            loader={MessagesBlocks.messageLoading()}
+                            endMessage={this.endMessage}
+                            
+                            // // below props only if you need pull down functionality
+                            // refreshFunction={this.refresh}
+                            // pullDownToRefreshThreshold="10px"
+                            // pullDownToRefresh
+                            // pullDownToRefreshContent={
+                            //     <h3 style={{textAlign: 'center'}}>&#8595; Pull down to refresh</h3>
+                            // }
+                            // releaseToRefreshContent={
+                            //     <h3 style={{textAlign: 'center'}}>&#8593; Release to refresh</h3>
+                            // }
+                        >
+                            {
+                                this.state.articles.map( article => {
+                                        return (
+                                            <ArticleBlockItem key={article.id} article={article}/>
+                                        );
+                                    }
+                                )
+                            }
+                        </InfiniteScroll>
+                    </div>
                 </div>
-            </div>
+            </main>
         );
     }
 }

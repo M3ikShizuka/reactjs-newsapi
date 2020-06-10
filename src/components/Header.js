@@ -32,6 +32,10 @@ class Header extends React.Component {
         this.controlMenu(!this.state.isMenuOpen);
     }
 
+    handleMenuClose = () => {
+        this.controlMenu(false);
+    }
+
     controlMenu(isMenuOpenNew) {
         if (isMenuOpenNew) {
             document.body.style.overflow = 'hidden';
@@ -50,7 +54,14 @@ class Header extends React.Component {
                     <nav styleName="header_menu_buttons_content">
                         {
                             this.props.pages.map((pageName) => {
-                                return (<HeaderMenuPageButton key={pageName.toLowerCase()} name={pageName.toUpperCase()} url={`/${pageName.toLowerCase()}`}/>);
+                                return (
+                                    <HeaderMenuPageButton 
+                                        key={pageName.toLowerCase()} 
+                                        name={pageName.toUpperCase()} 
+                                        url={`/${pageName.toLowerCase()}`}
+                                        handleOnClickPage={this.handleMenuClose}
+                                    />
+                                );
                             })
                         }
                     </nav>
@@ -73,7 +84,14 @@ class Header extends React.Component {
                         <nav styleName="header_buttons_content">
                             <ul>
                                 {this.props.pages.map((pageName) => {
-                                    return (<HeaderPageButton key={pageName.toLowerCase()}  name={pageName.toUpperCase()} url={`/${pageName.toLowerCase()}`}/>);
+                                    return (
+                                        <HeaderPageButton 
+                                            key={pageName.toLowerCase()}  
+                                            name={pageName.toUpperCase()} 
+                                            url={`/${pageName.toLowerCase()}`}
+                                            handleOnClickPage={this.handleMenuClose}
+                                        />
+                                    );
                                 })}
                             </ul>
                         </nav>

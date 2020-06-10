@@ -187,18 +187,6 @@ h4 {
     transition: all 0.5s;
 }
 
-@media (min-width: 900px) {
-    .wrapper {
-        width: 90%;
-    }
-}
-
-@media (max-width: 900px) {
-    .wrapper {
-        width: 100%;
-    }
-}
-
 .img_content {
     height: 100%;
 }

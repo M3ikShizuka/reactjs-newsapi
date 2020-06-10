@@ -1,10 +1,13 @@
 {
-  "name": "newsapi",
+  "name": "ShizukaNews",
   "version": "1.0.0",
-  "description": "",
+  "description": "Headlines and news from around the world",
+  "homepage": "http://M3ikShizuka.github.io/ShizukaNews",
   "scripts": {
     "dev": "webpack-dev-server --open --config ./build/webpack.dev.conf.js",
-    "build": "webpack --config ./build/webpack.build.conf.js"
+    "build": "webpack --config ./build/webpack.build.conf.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "keywords": [],
   "author": "M3ik Shizuka",
@@ -16,9 +19,11 @@
     "babel-loader": "^8.1.0",
     "babel-runtime": "^6.26.0",
     "css-loader": "^3.5.3",
+    "gh-pages": "^3.0.0",
     "html-webpack-plugin": "^4.3.0",
     "sass": "^1.26.8",
     "sass-loader": "^8.0.2",
+    "social-tags-webpack-plugin": "^1.1.0",
     "style-loader": "^1.2.1",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
@@ -26,6 +31,7 @@
   "dependencies": {
     "@loadable/component": "^5.12.0",
     "babel-plugin-react-css-modules": "^5.2.6",
+    "copy-webpack-plugin": "^6.0.2",
     "file-loader": "^6.0.0",
     "incstr": "^1.2.3",
     "mini-css-extract-plugin": "^0.9.0",

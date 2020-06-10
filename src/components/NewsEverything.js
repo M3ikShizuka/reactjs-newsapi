@@ -154,42 +154,44 @@ class NewsEverything extends React.Component {
 
     render() {
         return (
-            <div styleName="wrapper">
-                <FilterPanelEverything 
-                    defaultValue={this.state.filterTextInputSearch}
-                    handleInputTextSearchOnChange={this.handleInputTextSearchOnChange}
-                    handleSearchButton={this.handleSearchButton}
-                />
-                <div styleName="article-list">
-                    <InfiniteScroll
-                        dataLength={this.state.articles.length} //This is important field to render the next data
-                        next={this.fetchMoreData}
-                        hasMore={this.canFetchMoreData}
-                        loader={MessagesBlocks.messageLoading()}
-                        endMessage={this.endMessage}
-                        
-                        // // below props only if you need pull down functionality
-                        // refreshFunction={this.refresh}
-                        // pullDownToRefreshThreshold="10px"
-                        // pullDownToRefresh
-                        // pullDownToRefreshContent={
-                        //     <h3 style={{textAlign: 'center'}}>&#8595; Pull down to refresh</h3>
-                        // }
-                        // releaseToRefreshContent={
-                        //     <h3 style={{textAlign: 'center'}}>&#8593; Release to refresh</h3>
-                        // }
-                    >
-                        {
-                            this.state.articles.map( article => {
-                                    return (
-                                        <ArticleBlockItem key={article.id} article={article}/>
-                                    );
-                                }
-                            )
-                        }
-                    </InfiniteScroll>
+            <main>
+                <div styleName="wrapper_news_everything">
+                    <FilterPanelEverything 
+                        defaultValue={this.state.filterTextInputSearch}
+                        handleInputTextSearchOnChange={this.handleInputTextSearchOnChange}
+                        handleSearchButton={this.handleSearchButton}
+                    />
+                    <div styleName="article-list">
+                        <InfiniteScroll
+                            dataLength={this.state.articles.length} //This is important field to render the next data
+                            next={this.fetchMoreData}
+                            hasMore={this.canFetchMoreData}
+                            loader={MessagesBlocks.messageLoading()}
+                            endMessage={this.endMessage}
+                            
+                            // // below props only if you need pull down functionality
+                            // refreshFunction={this.refresh}
+                            // pullDownToRefreshThreshold="10px"
+                            // pullDownToRefresh
+                            // pullDownToRefreshContent={
+                            //     <h3 style={{textAlign: 'center'}}>&#8595; Pull down to refresh</h3>
+                            // }
+                            // releaseToRefreshContent={
+                            //     <h3 style={{textAlign: 'center'}}>&#8593; Release to refresh</h3>
+                            // }
+                        >
+                            {
+                                this.state.articles.map( article => {
+                                        return (
+                                            <ArticleBlockItem key={article.id} article={article}/>
+                                        );
+                                    }
+                                )
+                            }
+                        </InfiniteScroll>
+                    </div>
                 </div>
-            </div>
+            </main>
         );
     }
 }
